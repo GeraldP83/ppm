@@ -1,0 +1,16 @@
+Shell {
+	background-color: #e3efff #c1d5ef 60%;
+}
+CTabFolder { swt-tab-renderer: url('bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.CTabRendering'); }
+CTabFolder {
+	swt-corner-radius: 5;
+}
+CTabFolder { swt-unselected-tabs-color: #e3efff #c1d5ef 60%; }
+CTabFolder { swt-outer-keyline-color: #B6BCCC; }
+CTabFolder { swt-corner-radius: 20; }
+//CTabFolder { swt-selected-tab-fill: #F79402; }
+
+Label { font-style: italic;
+          font-size: 12; 
+          font-weight: bold;
+          font-family: "Terminal"; }

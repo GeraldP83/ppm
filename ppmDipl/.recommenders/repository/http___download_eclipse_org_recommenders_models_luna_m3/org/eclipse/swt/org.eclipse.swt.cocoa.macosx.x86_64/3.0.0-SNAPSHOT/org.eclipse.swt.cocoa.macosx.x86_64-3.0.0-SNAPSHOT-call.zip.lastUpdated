@@ -1,0 +1,4 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Wed Mar 12 15:52:31 CET 2014
+http\://download.eclipse.org/recommenders/models/luna-m3/.error=Could not transfer artifact org.eclipse.swt\:org.eclipse.swt.cocoa.macosx.x86_64\:zip\:call\:3.0.0-SNAPSHOT from/to models (http\://download.eclipse.org/recommenders/models/luna-m3/)\: Error transferring file\: null to http\://download.eclipse.org/recommenders/models/luna-m3/org/eclipse/swt/org.eclipse.swt.cocoa.macosx.x86_64/3.0.0-SNAPSHOT/org.eclipse.swt.cocoa.macosx.x86_64-3.0.0-SNAPSHOT-call.zip
+default-http\://download.eclipse.org/recommenders/models/luna-m3/.lastUpdated=1394635951761

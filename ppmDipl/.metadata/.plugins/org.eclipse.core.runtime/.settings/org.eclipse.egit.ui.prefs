@@ -1,0 +1,4 @@
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\n<messages>\n<message>blubb</message>\n<message>...</message>\n<message>removed test folder structure</message>\n<message>added equals</message>\n<message>removed unit tests from view</message>\n<message>Added a Fragment for unit tests and removed tests from view</message>\n<message>.</message>\n<message>refactored hibernate.xml path</message>\n<message>added test structures&\#x0A;&\#x0A;</message>\n<message>added Junit jars</message>\n</messages>
+eclipse.preferences.version=1
+resourcehistory_graph_split=500,500
+resourcehistory_rev_split=700,300

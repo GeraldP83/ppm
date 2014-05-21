@@ -1,0 +1,18 @@
+1395678333194	Rename local variable 'configBUtton'
+1395681443850	Rename method 'openShell'
+1395681763359	Rename local variable 'prop'
+1395682321410	Rename local variable 'firstElement'
+1395683849243	Rename type 'NodeAdministrationView'
+1395683874087	Rename type 'NodeAdminTest'
+1395686757595	Rename type 'NumberInputDialog'
+1395918965365	Rename type 'NodeAdministrationView'
+1395919448178	Rename local variable 'Software'
+1395932217249	Delete element
+1395932386614	Delete element
+1395932749548	Delete element
+1395933032592	Delete element
+1396010451724	Delete element
+1396012399421	Infer generic type arguments
+1396012743248	Extract local variable 'size'
+1396017580993	Rename field 'prop'
+1396020510735	Extract method 'createTree'

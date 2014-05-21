@@ -1,0 +1,5 @@
+node '$name' {
+    #foreach ( $element in $list )
+     	include $element
+    #end
+}

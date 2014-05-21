@@ -1,0 +1,54 @@
+package at.ppm.puppet.dal;
+
+import org.hibernate.Session;
+
+import at.ppm.puppet.dal.hibpojos.Assignment;
+import at.ppm.puppet.dal.hibpojos.ModuleVersion;
+import at.ppm.puppet.dal.hibpojos.Node;
+import at.ppm.puppet.dal.utils.HibernateSession;
+
+
+
+
+
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	
+//    	NodeRepositoryImpl repo = new NodeRepositoryImpl();
+//    	repo.createNode("3TN21");
+//    	repo.addModuleVersionToNode("3TN21", "java1.5");
+//    	repo.addModuleVersionToNode("3TN21", "java1.5");
+//    	repo.createNode("3TN21");
+//    	repo.createNode("3TN22");
+//    	repo.createNode("OTN48");
+//    	repo.deleteNodeAndAssignments("uiuiui");
+//    	repo.createNode("wupsi");
+//    	repo.createNode("uiuiui");
+//    	Node n = repo.getNode("uiuiui");
+//    	ArrayList<Assignment> assignment2 = n.getAssignment();
+//    	System.out.println(assignment2.size());
+//    	Session session = HibernateSession.getInstance();
+//    	session.delete(assignment2.get(0));
+//    	session.getTransaction().commit();
+ 
+
+//    	repo.save("uiuiui", "java1.5");
+//    	Assignment assignment = new Assignment();
+//    	Session session = HibernateSession.getInstance();
+//    	ModuleVersion module = (ModuleVersion) session.get(ModuleVersion.class, 2);
+//    	assignment.setNode(n);
+//    	assignment.setModule(module);
+//    	assignment.setActive(false);
+//    	assignment.setUse_latest(true);
+//    	session.save(assignment);
+//    	repo.update(n);
+    	
+    	
+
+    }
+
+	
+}

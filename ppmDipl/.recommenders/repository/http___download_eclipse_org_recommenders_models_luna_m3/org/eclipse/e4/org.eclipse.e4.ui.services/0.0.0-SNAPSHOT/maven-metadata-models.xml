@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.eclipse.e4</groupId>
+  <artifactId>org.eclipse.e4.ui.services</artifactId>
+  <version>0.0.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20131027.160619</timestamp>
+      <buildNumber>2</buildNumber>
+    </snapshot>
+    <lastUpdated>20131027160619</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <classifier>clng</classifier>
+        <extension>zip</extension>
+        <value>0.0.0-20131027.160619-2</value>
+        <updated>20131027160619</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <classifier>call</classifier>
+        <extension>zip</extension>
+        <value>0.0.0-20131027.113616-1</value>
+        <updated>20131027113616</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>
