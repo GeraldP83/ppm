@@ -6,7 +6,7 @@ import at.ppm.puppet.bl.Interfaces.IWatchService;
 
 public class DeploymentServiceFactoryImpl implements IDeploymentServiceFactory{
 	
-	private  final static DeploymentServiceFactoryImpl instance = new DeploymentServiceFactoryImpl();
+	private final static DeploymentServiceFactoryImpl instance = new DeploymentServiceFactoryImpl();
 	
 	private DeploymentServiceFactoryImpl(){}
 	

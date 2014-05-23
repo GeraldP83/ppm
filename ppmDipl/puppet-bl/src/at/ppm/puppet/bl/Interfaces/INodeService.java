@@ -2,6 +2,7 @@ package at.ppm.puppet.bl.Interfaces;
 
 import java.util.ArrayList;
 
+import at.ppm.puppet.bl.PuppetModule;
 import at.ppm.puppet.dal.hibpojos.Assignment;
 import at.ppm.puppet.dal.hibpojos.Node;
 
@@ -26,5 +27,6 @@ public interface INodeService {
 	String getNodeState(ArrayList<Assignment> assignments);
 	boolean nodeContainsSoftware(String nodeName, String software);
 	void deleteNodeLogFile(String name);
+	ArrayList<PuppetModule> getPuppetModules(Node node);
 
 }

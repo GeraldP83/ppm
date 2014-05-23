@@ -24,7 +24,9 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import at.ppm.puppet.bl.DeploymentConfigService;
+import at.ppm.puppet.bl.DeploymentServiceFactoryImpl;
 import at.ppm.puppet.bl.PuppetModule;
+import at.ppm.puppet.bl.Interfaces.INodeService;
 import at.ppm.puppet.dal.hibpojos.Module;
 import at.ppm.puppet.dal.hibpojos.Node;
 import at.ppm.view.util.Events;
@@ -33,6 +35,7 @@ public class PropertiesView {
 
 	private Table table;
 	private TableViewer tableViewer;
+	private INodeService nodeService;
 
 	public PropertiesView() {
 	}
@@ -42,6 +45,7 @@ public class PropertiesView {
 	 */
 	@PostConstruct
 	public void createControls(Composite parent) {
+		nodeService = DeploymentServiceFactoryImpl.getInstance().createNodeService();
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -130,7 +134,7 @@ public class PropertiesView {
 			tableViewer.setInput(null);			
 		}
 		else {
-			ArrayList<PuppetModule> prop = DeploymentConfigService.getPuppetModules(node);
+			ArrayList<PuppetModule> prop = nodeService.getPuppetModules(node);
 			if (prop.size() == 0) {
 				prop.add(new PuppetModule("Nothing Installed", null, null, null));
 			}

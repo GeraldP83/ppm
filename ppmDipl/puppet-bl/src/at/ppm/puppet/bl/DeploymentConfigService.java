@@ -46,17 +46,7 @@ public class DeploymentConfigService {
 //		return all;
 //	}
 
-	public static ArrayList<PuppetModule> getPuppetModules(Node node) {
-		ArrayList<Assignment> assignments = node.getAssignment();
-		ArrayList<PuppetModule> puppetModules = new ArrayList<PuppetModule>(
-				assignments.size());
-		for (Assignment assignment : assignments) {
-			puppetModules.add(new PuppetModule(assignment.getModuleVersion().getVersion(),
-					assignment.getModuleVersion().getModule().getName(), assignment
-							.getDate(), assignment.getState()));
-		}
-		return puppetModules;
-	}
+
 
 	public static ArrayList<String> getSoftwareVersionsFromPropFile(
 			String software) {

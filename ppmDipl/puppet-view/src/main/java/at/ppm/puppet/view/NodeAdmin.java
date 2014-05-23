@@ -26,8 +26,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import at.ppm.puppet.bl.DeploymentConfigService;
+import at.ppm.puppet.bl.DeploymentServiceFactoryImpl;
 import at.ppm.puppet.bl.PuppetModule;
 import at.ppm.puppet.bl.SoftwareModule;
+import at.ppm.puppet.bl.Interfaces.INodeService;
 import at.ppm.puppet.bl.Interfaces.INodeService.AssignmentState;
 import at.ppm.puppet.dal.hibpojos.Node;
 import at.ppm.view.util.Events;
@@ -41,6 +43,7 @@ public class NodeAdmin {
 	private Node lastSelectedNode;
 	private ArrayList<CheckBox> boxes;
 	private Button deploy;
+	private INodeService nodeService;
 	@Inject
 	IEventBroker eventBroker;
 	
@@ -52,6 +55,7 @@ public class NodeAdmin {
 	 */
 	@PostConstruct
 	public void createControls(Composite parent) {
+		nodeService = DeploymentServiceFactoryImpl.getInstance().createNodeService();
 		canvas = new FXCanvas(parent, SWT.NONE);
 		deploy = new Button("Deploy");
 		createTree(canvas);
@@ -190,7 +194,7 @@ public class NodeAdmin {
 			createTree(canvas);
 		}
 		else {
-			puppetModulesFromSelectedNode = DeploymentConfigService.getPuppetModules(lastSelectedNode);
+			puppetModulesFromSelectedNode = nodeService.getPuppetModules(lastSelectedNode);
 			if (puppetModulesFromSelectedNode.size() == 0) {
 				puppetModulesFromSelectedNode.add(new PuppetModule("Nothing Installed", null, null, null));
 			}

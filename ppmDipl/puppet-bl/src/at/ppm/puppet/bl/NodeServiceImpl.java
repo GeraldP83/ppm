@@ -182,7 +182,7 @@ public class NodeServiceImpl implements INodeService{
 		return stateOrange == null ? stateGreen : stateOrange;
 	}
 
-	//TODO check for case problems
+	//TODO check for case sensitive problems
 	@Override
 	public void deleteNodeLogFile(String name) {
 		File logFile = new File("/etc/puppet/logs/" + name + ".txt");
@@ -197,6 +197,20 @@ public class NodeServiceImpl implements INodeService{
 //		} catch (IOException e) {
 //		    e.printStackTrace();
 //		}  
+		
+	}
+
+	@Override
+	public ArrayList<PuppetModule> getPuppetModules(Node node) {
+			ArrayList<Assignment> assignments = node.getAssignment();
+			ArrayList<PuppetModule> puppetModules = new ArrayList<PuppetModule>(
+					assignments.size());
+			for (Assignment assignment : assignments) {
+				puppetModules.add(new PuppetModule(assignment.getModuleVersion().getVersion(),
+						assignment.getModuleVersion().getModule().getName(), assignment
+								.getDate(), assignment.getState()));
+			}
+			return puppetModules;
 		
 	}
 
