@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring accessors="true" comment="Delete element from project &apos;puppet-bl&apos;&#x0A;- Original project: &apos;puppet-bl&apos;&#x0A;- Original element: &apos;puppet-bl/src/at.ppm.puppet.bl.velocity&apos;" description="Delete element" element1="/src&lt;at.ppm.puppet.bl.velocity" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1397207807007" subPackages="false" version="1.0"/>
-</session>

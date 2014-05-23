@@ -1,6 +1,0 @@
-1396346805237	Rename field 'InstallationDate'
-1396383951814	Rename field 'INSTALLING'
-1396384075683	Rename local variable 'propObjects'
-1396439613231	Extract local variable 'name'
-1396439624863	Extract local variable 'text'
-1396459320993	Rename field 'CHANGING'

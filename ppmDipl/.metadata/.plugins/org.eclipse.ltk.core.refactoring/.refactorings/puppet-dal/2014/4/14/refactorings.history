@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Extract method &apos;private static SessionFactory createFactory()&apos; from &apos;at.ppm.puppet.dal.utils.HibernateSession.getInstance()&apos; to &apos;at.ppm.puppet.dal.utils.HibernateSession&apos;&#x0A;- Original project: &apos;puppet-dal&apos;&#x0A;- Method name: &apos;createFactory&apos;&#x0A;- Destination type: &apos;at.ppm.puppet.dal.utils.HibernateSession&apos;&#x0A;- Declared visibility: &apos;private&apos;" comments="false" description="Extract method &apos;createFactory&apos;" destination="0" exceptions="false" flags="786434" id="org.eclipse.jdt.ui.extract.method" input="/src&lt;at.ppm.puppet.dal.utils{HibernateSession.java" name="createFactory" replace="false" selection="747 245" stamp="1396347452766" version="1.0" visibility="2"/>
-</session>
