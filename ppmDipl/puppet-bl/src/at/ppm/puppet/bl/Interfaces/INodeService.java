@@ -28,5 +28,6 @@ public interface INodeService {
 	boolean nodeContainsSoftware(String nodeName, String software);
 	void deleteNodeLogFile(String name);
 	ArrayList<PuppetModule> getPuppetModules(Node node);
+	void writePuppetInitFile();
 
 }

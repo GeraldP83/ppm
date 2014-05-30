@@ -48,8 +48,7 @@ public class DeploymentConfigService {
 
 
 
-	public static ArrayList<String> getSoftwareVersionsFromPropFile(
-			String software) {
+	public static ArrayList<String> getSoftwareVersionsFromPropFile(String software) {
 		ArrayList<String> foundVersion = new ArrayList<>();
 		Properties props = modulConfig.getAll();
 		Set<Object> keySet = props.keySet();
@@ -128,21 +127,10 @@ public class DeploymentConfigService {
 			}
 
 		}
-		// File f = new File("Users/gerald/testing");
-		//
-		// System.out.println(f.getPath());
-
 		Velocity.writeNodeFilesForPuppet(velocityObject);
 	}
 
-	public static void writePuppetInitFile() {
-		ArrayList<Node> allNodes = nodeservice.getAllNodes();
-		ArrayList<String> nodeNames = new ArrayList<String>();
-		for (Node node : allNodes) {
-			nodeNames.add(node.getName());
-		}
-		Velocity.writePuppetSiteFile(nodeNames);
-	}
+	
 
 	
 

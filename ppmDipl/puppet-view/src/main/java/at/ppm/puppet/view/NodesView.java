@@ -170,7 +170,7 @@ public class NodesView implements ILogFileListener{
 				String nodeName = createDialog();
 				if (nodeName == null) return;
 				nodeService.createNode(nodeName);
-				DeploymentConfigService.writePuppetInitFile();
+				nodeService.writePuppetInitFile();
 				updateView(tableViewerNodesView);
 			}
 		});
@@ -187,7 +187,7 @@ public class NodesView implements ILogFileListener{
 				}
 				nodeService.deleteNodeLogFile(selectedNode.getName());
 				nodeService.deleteNodeAndAssignments(selectedNode.getName());
-				DeploymentConfigService.writePuppetInitFile();
+				nodeService.writePuppetInitFile();
 				updateView(tableViewerNodesView);
 			}
 		});

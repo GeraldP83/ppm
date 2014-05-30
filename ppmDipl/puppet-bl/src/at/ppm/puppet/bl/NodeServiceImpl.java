@@ -19,6 +19,7 @@ import at.ppm.puppet.dal.ModelRepositoryImpl;
 import at.ppm.puppet.dal.hibpojos.Assignment;
 import at.ppm.puppet.dal.hibpojos.ModuleVersion;
 import at.ppm.puppet.dal.hibpojos.Node;
+import at.ppm.puppet.dal.velocity.Velocity;
 
 public class NodeServiceImpl implements INodeService{
 	
@@ -211,7 +212,18 @@ public class NodeServiceImpl implements INodeService{
 								.getDate(), assignment.getState()));
 			}
 			return puppetModules;
+	}
+
+	@Override
+	public void writePuppetInitFile() {
+			ArrayList<Node> allNodes = getAllNodes();
+			ArrayList<String> nodeNames = new ArrayList<String>();
+			for (Node node : allNodes) {
+				nodeNames.add(node.getName());
+			}
+			Velocity.writePuppetSiteFile(nodeNames);
 		
 	}
+	
 
 }
