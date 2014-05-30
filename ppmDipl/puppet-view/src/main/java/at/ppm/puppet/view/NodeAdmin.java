@@ -63,6 +63,7 @@ public class NodeAdmin {
 
 	private void createTree(FXCanvas canvas) {
 		boxes = new ArrayList<>();
+		//same as Borderlayout
 		BorderPane root = new BorderPane();
 		treeView = createTreeStructure();
 		root.setCenter(treeView);
@@ -74,14 +75,14 @@ public class NodeAdmin {
 	}
 
 	/**
-	 * creates the treeStructure. 
 	 * 
-	 * @return
 	 */
 	@SuppressWarnings("unchecked")
 	private TreeView<String> createTreeStructure() {
+		//contains all modules and each module has an arraylist containing the available versions
 		treeStructureList = DeploymentConfigService.createTreeStructureForJavaFx();
 		TreeView<String> treeView = new TreeView<String>();
+		//puppetmodlue are the modules already installed on a specific node, also used for the prop view
 		if (puppetModulesFromSelectedNode == null) {
 			CheckBoxTreeItem<String> root = new CheckBoxTreeItem<String>("Select Node to enable Selecting Software!!");
 			treeView.setRoot(root);
@@ -105,7 +106,7 @@ public class NodeAdmin {
 					checkBox.setOnAction(new CheckBoxEventHandler());
 					boxes.add(checkBox);
 					TreeItem<CheckBox> box = new TreeItem<CheckBox>(checkBox);
-					if (puppetModulesFromSelectedNode != null) {
+//					if (puppetModulesFromSelectedNode != null) {
 						for (int p = 0; p < puppetModulesFromSelectedNode.size(); p++) {
 							if ((puppetModulesFromSelectedNode.get(p).getNameAndVersion().equalsIgnoreCase(checkBox.getText())) &&
 									(puppetModulesFromSelectedNode.get(p).getState().equalsIgnoreCase(AssignmentState.UNINSTALL.toString()))) {
@@ -118,7 +119,7 @@ public class NodeAdmin {
 							}
 						}
 						
-					}
+//					}
 					
 					boxArray[j] = box;
 				}

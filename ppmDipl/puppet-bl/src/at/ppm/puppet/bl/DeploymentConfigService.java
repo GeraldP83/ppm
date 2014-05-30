@@ -69,7 +69,7 @@ public class DeploymentConfigService {
 		String moduleName;
 		for (Module module : modules) {
 			moduleName = module.getName();
-			versions = getSoftwareVersionsFromPropFile(module.getName());
+			versions = getSoftwareVersionsFromPropFile(moduleName);
 			treeStructure.add(new SoftwareModule(moduleName, versions));
 		}
 		Collections.sort(treeStructure, new SoftwareModuleComparator());
