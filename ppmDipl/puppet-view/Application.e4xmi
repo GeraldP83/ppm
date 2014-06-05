@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_ccIuYKh4EeOSMNcI1P02DQ" elementId="org.eclipse.e4.ide.application" bindingContexts="_ccIuaah4EeOSMNcI1P02DQ">
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_ccIuYKh4EeOSMNcI1P02DQ" elementId="org.eclipse.e4.ide.application" bindingContexts="_ccIuaah4EeOSMNcI1P02DQ">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_ccIuYah4EeOSMNcI1P02DQ" label="puppet-view" width="800" height="600">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_iwGqAKh8EeOBxM6tN6ACXg" elementId="puppet-view.perspectivestack.0">
-      <children xsi:type="advanced:Perspective" xmi:id="_knoMUKh8EeOBxM6tN6ACXg" elementId="puppet-view.perspective.0">
+      <children xsi:type="advanced:Perspective" xmi:id="_knoMUKh8EeOBxM6tN6ACXg" elementId="puppet-view.perspective.main">
         <children xsi:type="basic:PartSashContainer" xmi:id="_l3DM0Kh8EeOBxM6tN6ACXg" elementId="puppet-view.partsashcontainer.0" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_nPN5oKh8EeOBxM6tN6ACXg" elementId="puppet-view.partstack.0" containerData="4300">
             <children xsi:type="basic:Part" xmi:id="_nnoZoKh8EeOBxM6tN6ACXg" elementId="puppet-view.part.0" contributionURI="bundleclass://puppet-view/at.ppm.puppet.view.NodesView" label="Nodes" iconURI="platform:/plugin/puppet-view/pics/Computer_15ce75eb4a.gif"/>
@@ -17,12 +17,26 @@
           </children>
         </children>
       </children>
+      <children xsi:type="advanced:Perspective" xmi:id="_29AekOiuEeO_BY3JGYDPvw" elementId="puppet-view.perspective.group" label="secondPerspective">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_5hGL8OiuEeO_BY3JGYDPvw" elementId="puppet-view.partsashcontainer.2">
+          <children xsi:type="basic:PartStack" xmi:id="_8uTHwOiuEeO_BY3JGYDPvw" elementId="puppet-view.partstack.3">
+            <children xsi:type="basic:Part" xmi:id="_APG8EOivEeO_BY3JGYDPvw" elementId="puppet-view.part.3" contributionURI="bundleclass://puppet-view/at.ppm.puppet.view.NodesView"/>
+          </children>
+        </children>
+      </children>
     </children>
+    <handlers xmi:id="_vyPf4OyyEeOm_cGc0XvXmg" elementId="puppet-view.handler.switch" contributionURI="bundleclass://puppet-view/at.ppm.puppet.view.handler.SwitchPerspectiveHandler" command="_S6gfkOyyEeOm_cGc0XvXmg"/>
+    <trimBars xmi:id="_y6xzkOyxEeOm_cGc0XvXmg" elementId="puppet-view.trimbar.0">
+      <children xsi:type="menu:ToolBar" xmi:id="_6I94kOyxEeOm_cGc0XvXmg" elementId="puppet-view.toolbar.0">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_7zvYUOyxEeOm_cGc0XvXmg" elementId="puppet-view.handledtoolitem.0" label="" iconURI="platform:/plugin/puppet-view/pics/switch.gif" tooltip="Switch View" command="_S6gfkOyyEeOm_cGc0XvXmg"/>
+      </children>
+    </trimBars>
   </children>
   <rootContext xmi:id="_ccIuaah4EeOSMNcI1P02DQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_ccIuaqh4EeOSMNcI1P02DQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
     <children xmi:id="_ccIua6h4EeOSMNcI1P02DQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
   </rootContext>
+  <commands xmi:id="_S6gfkOyyEeOm_cGc0XvXmg" elementId="puppet-view.command.switch" commandName="Switch View"/>
   <addons xmi:id="_ccIuYqh4EeOSMNcI1P02DQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_ccIuY6h4EeOSMNcI1P02DQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_ccIuZKh4EeOSMNcI1P02DQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
