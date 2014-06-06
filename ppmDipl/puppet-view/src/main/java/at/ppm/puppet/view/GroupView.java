@@ -1,5 +1,6 @@
 package at.ppm.puppet.view;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,10 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
-import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -39,31 +38,24 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import at.ppm.puppet.bl.DeploymentServiceFactoryImpl;
-import at.ppm.puppet.bl.Interfaces.ILogFileListener;
-import at.ppm.puppet.bl.Interfaces.INodeService;
-import at.ppm.puppet.bl.Interfaces.IWatchService;
-import at.ppm.puppet.dal.hibpojos.Node;
-import at.ppm.view.util.Events;
-import at.ppm.view.util.ImageUtil;
+import at.ppm.puppet.bl.Interfaces.IGroupService;
+import at.ppm.puppet.dal.hibpojos.Groups;
 
-public class NodesView implements ILogFileListener{
+public class GroupView {
 	
-	private INodeService nodeService;
-	private IWatchService watchService;
-
+	private IGroupService groupService;
 	private Table nodesViewTable;
 	@Inject
 	private IEventBroker eventbroker;
-	private ArrayList<Node> list = new ArrayList<Node>();
-	private Node selectedNode;
-	private TableViewer tableViewerNodesView;
-	private int currentlySelectedNode;
+	private ArrayList<Groups> list = new ArrayList<Groups>();
+	private Groups selectedGroup;
+	private TableViewer tableViewerGroupsView;
+	private int currentlySelectedGroup;
 	private TableColumn nodeNameColumn;
 
 
-	public NodesView() {
-		nodeService = DeploymentServiceFactoryImpl.getInstance().createNodeService();
-		watchService = DeploymentServiceFactoryImpl.getInstance().createWatchService();
+	public GroupView() {
+		groupService = DeploymentServiceFactoryImpl.getInstance().createGroupService();
 	}
 
 	/**
@@ -73,7 +65,6 @@ public class NodesView implements ILogFileListener{
 	@PostConstruct
 	public void createControls(final Composite parent) {
 		
-		watchService.registerListener(this);
 		GridLayout gl_parent = new GridLayout(1, true);
 		gl_parent.marginTop = 1;
 		gl_parent.marginRight = 1;
@@ -95,78 +86,59 @@ public class NodesView implements ILogFileListener{
 		gd_TableComposite.heightHint = 374;
 		TableComposite.setLayoutData(gd_TableComposite);
 
-		tableViewerNodesView = new TableViewer(TableComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		tableViewerGroupsView = new TableViewer(TableComposite, SWT.BORDER | SWT.FULL_SELECTION);
 
 		/**
 		 * the eventbroker sends the selected node to the propView
 		 */
-		tableViewerNodesView.addSelectionChangedListener(new ISelectionChangedListener() {
+		tableViewerGroupsView.addSelectionChangedListener(new ISelectionChangedListener() {
 					public void selectionChanged(SelectionChangedEvent event) {
-						IStructuredSelection selection = (IStructuredSelection) tableViewerNodesView.getSelection();
-						currentlySelectedNode = tableViewerNodesView.getTable().getSelectionIndex();
+						IStructuredSelection selection = (IStructuredSelection) tableViewerGroupsView.getSelection();
+						currentlySelectedGroup = tableViewerGroupsView.getTable().getSelectionIndex();
 						if (!selection.isEmpty()) {
-							selectedNode = (Node) selection.getFirstElement();
-							eventbroker.post(Events.NODESELECTED, selectedNode);
+							selectedGroup = (Groups) selection.getFirstElement();
+//							eventbroker.post(Events.GROUPSELECTED, selectedGroup);
 						} else {
-							selectedNode = null;
-							eventbroker.post(Events.NODESELECTED, null);
+							selectedGroup = null;
+//							eventbroker.post(Events.GROUPSELECTED, null);
 						}
-//						updateView(tableViewerNodesView);
+//						updateView();
 					}
 				});
-		nodesViewTable = tableViewerNodesView.getTable();
+		nodesViewTable = tableViewerGroupsView.getTable();
 		nodesViewTable.setFont(SWTResourceManager.getFont("Lucida Grande", 14, SWT.NORMAL));
 		nodesViewTable.setHeaderVisible(true);
 		nodesViewTable.setBounds(0, 0, 18, 81);
 
-		TableViewerColumn statusTableViewerColumn = new TableViewerColumn(tableViewerNodesView, SWT.NONE);
-		statusTableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
-			public Image getImage(Object element) {
-				Node node = (Node)element;
-				if (node.getAssignment().size() < 1) return null;
-				String state = nodeService.getNodeState(node.getAssignment());
-				Image image = ImageUtil.create(state);
-				return image;
-			}
-
-			public String getText(Object element) {
-				return null;
-			}
-		});
-		TableColumn statusColumn = statusTableViewerColumn.getColumn();
-		statusColumn.setWidth(50);
-		statusColumn.setText("Status");
-
-		TableViewerColumn nodeNameTableViewerColumn = new TableViewerColumn(
-				tableViewerNodesView, SWT.NONE);
-		nodeNameTableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
+		TableViewerColumn groupNameTableViewerColumn = new TableViewerColumn(
+				tableViewerGroupsView, SWT.NONE);
+		groupNameTableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 			public Image getImage(Object element) {
 				// TODO Auto-generated method stub
 				return null;
 			}
 
 			public String getText(Object element) {
-				Node node = (Node) element;
-				return node.getName();
+				Groups group = (Groups) element;
+				return group.getName();
 			}
 		});
-		nodeNameColumn = nodeNameTableViewerColumn.getColumn();
+		nodeNameColumn = groupNameTableViewerColumn.getColumn();
 		nodeNameColumn.setWidth(150);
-		nodeNameColumn.setText("Node Name");
-		tableViewerNodesView.setContentProvider(new ArrayContentProvider());
+		nodeNameColumn.setText("Group Name");
+		tableViewerGroupsView.setContentProvider(new ArrayContentProvider());
 
 		Button addButton = new Button(ButtonComposite, SWT.NONE);
-		addButton.setText("Add Node");
+		addButton.setText("Add Group");
 		addButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
 				1));
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				String nodeName = createDialog();
-				if (nodeName == null) return;
-				nodeService.createNode(nodeName);
-				nodeService.writePuppetInitFile();
-				updateView(tableViewerNodesView);
+				String groupName = createDialog();
+				if (groupName == null) return;
+				groupService.createGroup(groupName);
+				updateView();
 			}
 		});
 
@@ -177,20 +149,18 @@ public class NodesView implements ILogFileListener{
 		deleteButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (selectedNode == null) {
+				if (selectedGroup == null) {
 					return;
 				}
-				nodeService.deleteNodeLogFile(selectedNode.getName());
-				nodeService.deleteNodeAndAssignments(selectedNode.getName());
-				nodeService.writePuppetInitFile();
-				updateView(tableViewerNodesView);
+				groupService.deleteGroup(selectedGroup.getName());
+				updateView();
 			}
 		});
 		deleteButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
 				1, 1));
-		deleteButton.setText("Delete Node");
+		deleteButton.setText("Delete Group");
 		new Label(ButtonComposite, SWT.NONE);
-		updateView(tableViewerNodesView);
+		updateView();
 
 	}
 
@@ -200,11 +170,10 @@ public class NodesView implements ILogFileListener{
 		return inputDialog.open();
 	}
 
-	private void updateView(TableViewer tableViewer) {
-		list = nodeService.getAllNodes();
+	private void updateView() {
+		list = groupService.getAllGroups();
 		Collections.sort(list);
-		tableViewer.setInput(list);
-	
+		tableViewerGroupsView.setInput(list);
 	}
 
 	private class InputDialog extends Dialog {
@@ -234,12 +203,13 @@ public class NodesView implements ILogFileListener{
 			Shell parent = getParent();
 			final Shell shell = new Shell(parent, SWT.TITLE | SWT.BORDER
 					| SWT.APPLICATION_MODAL);
-			shell.setText("Create Node Dialog");
+			shell.setText("Create Group Dialog");
+			shell.setLocation(50, 50);
 
 			shell.setLayout(new GridLayout(2, true));
 
 			Label label = new Label(shell, SWT.NULL);
-			label.setText("Please enter a Nodename:");
+			label.setText("Please enter a Groupname:");
 
 			final Text text = new Text(shell, SWT.SINGLE | SWT.BORDER);
 
@@ -253,7 +223,7 @@ public class NodesView implements ILogFileListener{
 				public void handleEvent(Event event) {
 					try {
 						value = text.getText();
-						if (value.length() == 0 || nodeService.nodeExists(value)) {
+						if (value.length() == 0 || groupService.groupExists(value)) {
 							buttonOK.setEnabled(false);
 							return;
 						}
@@ -299,19 +269,6 @@ public class NodesView implements ILogFileListener{
 
 	}
 
-	
-	@Inject
-	@Optional
-	private void getNotified(@UIEventTopic(Events.DEPLOINGSTARTED) Node node) {
-		updateAndRefreshSelection();
-	}
-
-	private void updateAndRefreshSelection() {
-		updateView(tableViewerNodesView);
-		tableViewerNodesView.getTable().setSelection(currentlySelectedNode);	
-		IStructuredSelection selection = (IStructuredSelection) tableViewerNodesView.getSelection();
-		tableViewerNodesView.setSelection(selection);
-	}
 
 	
 	@PreDestroy
@@ -322,18 +279,5 @@ public class NodesView implements ILogFileListener{
 	public void setFocus() {
 		// TODO Set the focus to control
 	}
-
-	@Override
-	public void logFileChanged() {
-		Display.getDefault().asyncExec(new Runnable() {
-			
-			@Override
-			public void run() {
-				updateAndRefreshSelection();
-				
-			}
-		});
-		
-		
-	}
 }
+

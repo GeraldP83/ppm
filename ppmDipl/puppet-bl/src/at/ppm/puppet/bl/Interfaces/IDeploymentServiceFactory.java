@@ -4,6 +4,7 @@ public interface IDeploymentServiceFactory {
 
 	INodeService createNodeService();
 	IWatchService createWatchService();
+	IGroupService createGroupService();
 	
 	
 }

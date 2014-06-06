@@ -1,6 +1,7 @@
 package at.ppm.puppet.dal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -8,17 +9,23 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import at.ppm.puppet.dal.hibpojos.Assignment;
+import at.ppm.puppet.dal.hibpojos.Groups;
 import at.ppm.puppet.dal.hibpojos.ModuleVersion;
 import at.ppm.puppet.dal.hibpojos.Node;
+import at.ppm.puppet.dal.hibpojos.NodeIsInGroup;
 import at.ppm.puppet.dal.utils.HibernateSession;
 
 public class ModelRepositoryImpl implements IModelRepository {
 	/**
 	 * 
 	 */
+	
+	
+	/**
+	 * update requires an existing object, save will create a new one (referring the database)
+	 */
 	@Override
-	public void addAssignmentToNode(Node node, Assignment assignment,
-			ModuleVersion module) {
+	public void addAssignmentToNode(Node node, Assignment assignment, ModuleVersion module) {
 		Session session = HibernateSession.getInstance();
 		Transaction tx = null;
 		try {
@@ -76,6 +83,24 @@ public class ModelRepositoryImpl implements IModelRepository {
 	@Override
 	public ArrayList<Assignment> getAssignmentsFromNode(Node node) {
 		return node.getAssignment();
+	}
+	
+	
+	@Override
+	public boolean delete(Object object) {
+		Session session = HibernateSession.getInstance();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.delete(object);
+			tx.commit();
+
+		} catch (Exception e) {
+			rollBack(tx, e);
+		} finally {
+			HibernateSession.closeSession();
+		}
+		return true;
 	}
 
 	@Override
@@ -136,13 +161,47 @@ public class ModelRepositoryImpl implements IModelRepository {
 		HibernateSession.closeSession();
 		return list;
 	}
+	
 
 	@Override
 	public ModuleVersion getModuleVersion(int id) {
 		Session session = HibernateSession.getInstance();
-		ModuleVersion module = (ModuleVersion) session.get(ModuleVersion.class,
-				id);
+		ModuleVersion module = (ModuleVersion) session.get(ModuleVersion.class, id);
 		HibernateSession.closeSession();
 		return module;
+	}
+
+	@Override
+	public void addNodeToGroup(Node node, NodeIsInGroup nodeIsInGroup, Groups group) {
+		Session session = HibernateSession.getInstance();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.update(node);
+			session.update(group);
+			session.save(nodeIsInGroup);
+			tx.commit();
+		} catch (Exception e) {
+			rollBack(tx, e);
+		} finally {
+			HibernateSession.closeSession();
+		}
+		
+	}
+
+	@Override
+	public Groups getGroup(String name) {
+		Session session = HibernateSession.getInstance();
+		Query q = session.createQuery("from Groups group where group.name = :name");
+		q.setString("name", name);
+		List<Groups> list = q.list();
+		if (list.size() == 1 && list.get(0).getName().equalsIgnoreCase(name)) {
+			HibernateSession.closeSession();
+			return list.get(0);
+		}
+		else {
+			HibernateSession.closeSession();
+			return null;
+		}
 	}
 }

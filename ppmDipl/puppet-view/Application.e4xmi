@@ -20,7 +20,7 @@
       <children xsi:type="advanced:Perspective" xmi:id="_29AekOiuEeO_BY3JGYDPvw" elementId="puppet-view.perspective.group" label="secondPerspective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_5hGL8OiuEeO_BY3JGYDPvw" elementId="puppet-view.partsashcontainer.2">
           <children xsi:type="basic:PartStack" xmi:id="_8uTHwOiuEeO_BY3JGYDPvw" elementId="puppet-view.partstack.3">
-            <children xsi:type="basic:Part" xmi:id="_APG8EOivEeO_BY3JGYDPvw" elementId="puppet-view.part.3" contributionURI="bundleclass://puppet-view/at.ppm.puppet.view.NodesView"/>
+            <children xsi:type="basic:Part" xmi:id="_APG8EOivEeO_BY3JGYDPvw" elementId="puppet-view.part.3" contributionURI="bundleclass://puppet-view/at.ppm.puppet.view.GroupView" label="Groups"/>
           </children>
         </children>
       </children>

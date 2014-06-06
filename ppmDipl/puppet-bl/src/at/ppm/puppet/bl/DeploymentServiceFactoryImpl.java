@@ -1,6 +1,7 @@
 package at.ppm.puppet.bl;
 
 import at.ppm.puppet.bl.Interfaces.IDeploymentServiceFactory;
+import at.ppm.puppet.bl.Interfaces.IGroupService;
 import at.ppm.puppet.bl.Interfaces.INodeService;
 import at.ppm.puppet.bl.Interfaces.IWatchService;
 
@@ -22,6 +23,11 @@ public class DeploymentServiceFactoryImpl implements IDeploymentServiceFactory{
 	@Override
 	public IWatchService createWatchService() {
 		return new WatchServiceImpl();
+	}
+
+	@Override
+	public IGroupService createGroupService() {
+		return new GroupServiceImpl();
 	}
 
 }

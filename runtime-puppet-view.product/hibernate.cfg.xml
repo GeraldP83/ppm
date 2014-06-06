@@ -23,6 +23,11 @@
     <mapping class="at.ppm.puppet.dal.hibpojos.Assignment"></mapping>
     <mapping class="at.ppm.puppet.dal.hibpojos.ModuleVersion"></mapping>
     <mapping class="at.ppm.puppet.dal.hibpojos.Module"></mapping>
+    <mapping class="at.ppm.puppet.dal.hibpojos.NodeIsInGroup"></mapping>
+    <mapping class="at.ppm.puppet.dal.hibpojos.Groups"></mapping>
+
+
+
 
   </session-factory>
 

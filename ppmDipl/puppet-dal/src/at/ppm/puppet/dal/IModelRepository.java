@@ -3,8 +3,10 @@ package at.ppm.puppet.dal;
 import java.util.ArrayList;
 
 import at.ppm.puppet.dal.hibpojos.Assignment;
+import at.ppm.puppet.dal.hibpojos.Groups;
 import at.ppm.puppet.dal.hibpojos.ModuleVersion;
 import at.ppm.puppet.dal.hibpojos.Node;
+import at.ppm.puppet.dal.hibpojos.NodeIsInGroup;
 
 public interface IModelRepository {
 	
@@ -25,5 +27,15 @@ public interface IModelRepository {
 	void addAssignmentToNode(Node node, Assignment assignment, ModuleVersion module);
 	
 	void update(Object obj);
+	
+	void addNodeToGroup(Node node, NodeIsInGroup nodeIsInGroup, Groups group);
+	
+	Groups getGroup(String name);
+
+	boolean delete(Object object);
+
+	
+	
+	
 
 }

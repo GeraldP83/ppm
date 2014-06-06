@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-
 @SuppressWarnings("serial")
 @Entity
 public class Node implements Serializable, Comparable<Node>{
@@ -29,6 +28,9 @@ public class Node implements Serializable, Comparable<Node>{
 
 	@OneToMany(mappedBy="node",fetch=FetchType.EAGER)
 	private Collection<Assignment> assignment = new ArrayList<Assignment>();
+	
+	@OneToMany(mappedBy="node")
+	private Collection<NodeIsInGroup> nodeIsInGroup = new ArrayList<NodeIsInGroup>();
 	
 	public void addAssignment(Assignment a) {
 		assignment.add(a);
