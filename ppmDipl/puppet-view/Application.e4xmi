@@ -18,9 +18,15 @@
         </children>
       </children>
       <children xsi:type="advanced:Perspective" xmi:id="_29AekOiuEeO_BY3JGYDPvw" elementId="puppet-view.perspective.group" label="secondPerspective">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_5hGL8OiuEeO_BY3JGYDPvw" elementId="puppet-view.partsashcontainer.2">
-          <children xsi:type="basic:PartStack" xmi:id="_8uTHwOiuEeO_BY3JGYDPvw" elementId="puppet-view.partstack.3">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_5hGL8OiuEeO_BY3JGYDPvw" elementId="puppet-view.partsashcontainer.2" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_8uTHwOiuEeO_BY3JGYDPvw" elementId="puppet-view.partstack.3" containerData="4300">
             <children xsi:type="basic:Part" xmi:id="_APG8EOivEeO_BY3JGYDPvw" elementId="puppet-view.part.3" contributionURI="bundleclass://puppet-view/at.ppm.puppet.view.GroupView" label="Groups"/>
+          </children>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_Z61YkO1_EeO8UJxt_-RNuw" elementId="puppet-view.partsashcontainer.3">
+            <children xsi:type="basic:PartStack" xmi:id="_cjnYsO1_EeO8UJxt_-RNuw" elementId="puppet-view.partstack.4">
+              <children xsi:type="basic:Part" xmi:id="_jiyKQO1_EeO8UJxt_-RNuw" elementId="puppet-view.part.4" contributionURI="bundleclass://puppet-view/at.ppm.puppet.view.GroupAdmin" label="Configure Group"/>
+            </children>
+            <children xsi:type="basic:PartStack" xmi:id="_dFcTYO1_EeO8UJxt_-RNuw" elementId="puppet-view.partstack.5" containerData="4000"/>
           </children>
         </children>
       </children>

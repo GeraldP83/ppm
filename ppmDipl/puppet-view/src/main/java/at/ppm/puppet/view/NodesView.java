@@ -111,7 +111,7 @@ public class NodesView implements ILogFileListener{
 							selectedNode = null;
 							eventbroker.post(Events.NODESELECTED, null);
 						}
-//						updateView(tableViewerNodesView);
+						updateView(tableViewerNodesView);
 					}
 				});
 		nodesViewTable = tableViewerNodesView.getTable();

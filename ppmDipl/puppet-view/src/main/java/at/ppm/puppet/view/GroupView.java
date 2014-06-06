@@ -40,6 +40,7 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import at.ppm.puppet.bl.DeploymentServiceFactoryImpl;
 import at.ppm.puppet.bl.Interfaces.IGroupService;
 import at.ppm.puppet.dal.hibpojos.Groups;
+import at.ppm.view.util.Events;
 
 public class GroupView {
 	
@@ -97,10 +98,10 @@ public class GroupView {
 						currentlySelectedGroup = tableViewerGroupsView.getTable().getSelectionIndex();
 						if (!selection.isEmpty()) {
 							selectedGroup = (Groups) selection.getFirstElement();
-//							eventbroker.post(Events.GROUPSELECTED, selectedGroup);
+							eventbroker.post(Events.GROUPSELECTED, selectedGroup);
 						} else {
 							selectedGroup = null;
-//							eventbroker.post(Events.GROUPSELECTED, null);
+							eventbroker.post(Events.GROUPSELECTED, null);
 						}
 //						updateView();
 					}

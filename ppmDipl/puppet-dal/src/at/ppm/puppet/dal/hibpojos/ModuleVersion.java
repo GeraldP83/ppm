@@ -34,6 +34,9 @@ public class ModuleVersion implements Serializable {
 	
 	@OneToMany(mappedBy="module")
 	private Collection<Assignment> nodes = new ArrayList<Assignment>();
+	
+	@OneToMany(mappedBy = "moduleVersion")
+	private Collection<GroupHasModule> groupHasModule = new ArrayList<GroupHasModule>();
 
 	public Module getModule() {
 		return module;

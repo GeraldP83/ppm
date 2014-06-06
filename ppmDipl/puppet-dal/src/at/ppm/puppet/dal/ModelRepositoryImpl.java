@@ -1,5 +1,6 @@
 package at.ppm.puppet.dal;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import at.ppm.puppet.dal.hibpojos.Assignment;
+import at.ppm.puppet.dal.hibpojos.GroupHasModule;
 import at.ppm.puppet.dal.hibpojos.Groups;
 import at.ppm.puppet.dal.hibpojos.ModuleVersion;
 import at.ppm.puppet.dal.hibpojos.Node;
@@ -41,6 +43,23 @@ public class ModelRepositoryImpl implements IModelRepository {
 		}
 
 	}
+	@Override
+	public void addGroupHasModuleToGroup(Groups group, GroupHasModule groupHasModule, ModuleVersion module) {
+		Session session = HibernateSession.getInstance();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.update(group);
+			session.update(module);
+			session.save(groupHasModule);
+			tx.commit();
+		} catch (Exception e) {
+			rollBack(tx, e);
+		} finally {
+			HibernateSession.closeSession();
+		}
+	}
+
 
 	@Override
 	// HQL for deleting

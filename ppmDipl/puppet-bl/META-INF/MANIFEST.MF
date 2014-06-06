@@ -15,7 +15,8 @@ Import-Package: at.ppm.puppet.bl.util,
  javafx.scene.control,
  javax.inject,
  org.eclipse.core.runtime,
- org.eclipse.e4.core.di.annotations
+ org.eclipse.e4.core.di.annotations,
+ org.hibernate
 Export-Package: at.ppm.puppet.bl,
  at.ppm.puppet.bl.Interfaces,
  at.ppm.puppet.bl.util

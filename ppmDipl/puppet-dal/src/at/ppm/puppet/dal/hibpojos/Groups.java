@@ -4,15 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 @SuppressWarnings("serial")
 @Entity
 public class Groups implements Serializable, Comparable<Groups> {
@@ -23,17 +21,32 @@ public class Groups implements Serializable, Comparable<Groups> {
 	private int group_id;
 	
 	@OneToMany(mappedBy="group")
-	@LazyCollection(LazyCollectionOption.FALSE)
+//	@LazyCollection(LazyCollectionOption.FALSE)
 	private Collection<NodeIsInGroup> nodesInGroup = new ArrayList<NodeIsInGroup>();
 	
+	@OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+//	@LazyCollection(LazyCollectionOption.FALSE) 
+	private Collection<GroupHasModule> groupHasModule = new ArrayList<GroupHasModule>();
+	
 	private String name;
+	
+	
 
-	public int getGropu_id() {
+	public int getGroup_id() {
 		return group_id;
 	}
 
-	public void setGropu_id(int gropu_id) {
-		this.group_id = gropu_id;
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
+	}
+
+	public ArrayList<GroupHasModule> getGroupHasModule() {
+		return new ArrayList<GroupHasModule>(groupHasModule);
+		
+	}
+
+	public void setGroupHasModule(Collection<GroupHasModule> groupHasModule) {
+		this.groupHasModule = groupHasModule;
 	}
 
 	public Collection<NodeIsInGroup> getNodesInGroup() {

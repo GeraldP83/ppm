@@ -1,8 +1,10 @@
 package at.ppm.puppet.dal;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 
 import at.ppm.puppet.dal.hibpojos.Assignment;
+import at.ppm.puppet.dal.hibpojos.GroupHasModule;
 import at.ppm.puppet.dal.hibpojos.Groups;
 import at.ppm.puppet.dal.hibpojos.ModuleVersion;
 import at.ppm.puppet.dal.hibpojos.Node;
@@ -33,6 +35,9 @@ public interface IModelRepository {
 	Groups getGroup(String name);
 
 	boolean delete(Object object);
+
+	void addGroupHasModuleToGroup(Groups group, GroupHasModule groupHasModule,
+			ModuleVersion module);
 
 	
 	
