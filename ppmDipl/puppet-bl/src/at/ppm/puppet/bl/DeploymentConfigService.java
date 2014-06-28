@@ -1,19 +1,12 @@
 package at.ppm.puppet.bl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
 
 import javafx.scene.control.CheckBox;
-
-import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.osgi.service.prefs.BackingStoreException;
-import org.osgi.service.prefs.Preferences;
-
 import at.ppm.puppet.bl.Interfaces.INodeService;
 import at.ppm.puppet.bl.Interfaces.INodeService.AssignmentState;
 import at.ppm.puppet.bl.util.PropertyConfig;
@@ -23,7 +16,6 @@ import at.ppm.puppet.dal.IModelRepository;
 import at.ppm.puppet.dal.ModelRepositoryImpl;
 import at.ppm.puppet.dal.hibpojos.Assignment;
 import at.ppm.puppet.dal.hibpojos.Module;
-import at.ppm.puppet.dal.hibpojos.ModuleVersion;
 import at.ppm.puppet.dal.hibpojos.Node;
 import at.ppm.puppet.dal.velocity.PuppetParamsForVelocity;
 import at.ppm.puppet.dal.velocity.Velocity;
