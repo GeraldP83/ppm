@@ -179,6 +179,7 @@ public class GroupAdmin {
 		public void handle(ActionEvent arg0) {
 //			DeploymentConfigService.setInstallingStateToAssignments(boxes, lastSelectedNode);
 //			eventBroker.post(Events.DEPLOINGSTARTED, lastSelectedNode);
+			groupService.setModulesToGroup(boxes, lastSelectedGroup);
 		}
 		
 	}

@@ -2,6 +2,7 @@ package at.ppm.puppet.bl.Interfaces;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.CheckBox;
 import at.ppm.puppet.bl.GroupModule;
 import at.ppm.puppet.bl.PuppetModule;
 import at.ppm.puppet.dal.hibpojos.Groups;
@@ -17,5 +18,7 @@ public interface IGroupService {
 	ArrayList<Groups> getAllGroups();
 
 	ArrayList<GroupModule> getGroupModules(Groups lastSelectedGroup);
+
+	void setModulesToGroup(ArrayList<CheckBox> boxes, Groups lastSelectedGroup);
 
 }

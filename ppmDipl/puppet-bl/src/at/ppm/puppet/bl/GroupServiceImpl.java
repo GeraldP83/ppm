@@ -2,10 +2,14 @@ package at.ppm.puppet.bl;
 
 import java.util.ArrayList;
 
+import javafx.scene.control.CheckBox;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import at.ppm.puppet.bl.Interfaces.IGroupService;
+import at.ppm.puppet.bl.util.PropertyConfig;
+import at.ppm.puppet.bl.util.PropertyConfig.PropertyFile;
 import at.ppm.puppet.dal.IModelRepository;
 import at.ppm.puppet.dal.ModelRepositoryImpl;
 import at.ppm.puppet.dal.hibpojos.GroupHasModule;
@@ -16,6 +20,7 @@ import at.ppm.puppet.dal.utils.HibernateSession;
 public class GroupServiceImpl implements IGroupService {
 
 	private final IModelRepository repo = new ModelRepositoryImpl();
+	PropertyConfig modulConfig = new PropertyConfig(PropertyFile.MODUL);
 
 	@Override
 	public void createGroup(String groupName) {
@@ -62,5 +67,42 @@ public class GroupServiceImpl implements IGroupService {
 		return groupModules;
 
 	}
+	
+	public boolean groupContainsSoftware(Groups group, String software) {
+		ArrayList<GroupModule> groupModules = getGroupModules(group);
+		for (GroupModule groupModule : groupModules) {
+			if (groupModule.getNameAndVersion().equalsIgnoreCase(software)) {return true;}
+		}
+		return false;
+		
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see at.ppm.puppet.bl.Interfaces.IGroupService#setModulesToGroup(java.util.ArrayList, at.ppm.puppet.dal.hibpojos.Groups)
+	 * box.getText() ist der ModulName welcher aus name und version besteht, sollte gleich sein wie groupmodule
+	 * getnameandVersion() 
+	 */
+	@Override
+	public void setModulesToGroup(ArrayList<CheckBox> boxes, Groups lastSelectedGroup) {
+		for (CheckBox checkBox : boxes) {
+			if (checkBox.isSelected()) {
+				if (!groupContainsSoftware(lastSelectedGroup, checkBox.getText())) {
+					//dann adde die software zu der tabelle 
+					GroupHasModule grouphasm = new GroupHasModule();
+					ModuleVersion moduleVersion = repo.getModuleVersion(modulConfig.get(checkBox.getText()));
+					grouphasm.setGroup(lastSelectedGroup);
+					grouphasm.setModuleVersion(moduleVersion);
+					repo.addGroupHasModuleToGroup(lastSelectedGroup, grouphasm, moduleVersion);
+				}
+				
+			}
+			
+		}
+		
+		
+	}
+	
 
 }
