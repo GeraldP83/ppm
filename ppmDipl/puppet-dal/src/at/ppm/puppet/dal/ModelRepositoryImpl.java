@@ -49,9 +49,9 @@ public class ModelRepositoryImpl implements IModelRepository {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			session.update(group);
-			session.update(module);
-			session.save(groupHasModule);
+			session.saveOrUpdate(group);
+			session.saveOrUpdate(module);
+			session.saveOrUpdate(groupHasModule);
 			tx.commit();
 		} catch (Exception e) {
 			rollBack(tx, e);

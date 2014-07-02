@@ -94,6 +94,7 @@ public class GroupServiceImpl implements IGroupService {
 					ModuleVersion moduleVersion = repo.getModuleVersion(modulConfig.get(checkBox.getText()));
 					grouphasm.setGroup(lastSelectedGroup);
 					grouphasm.setModuleVersion(moduleVersion);
+//					lastSelectedGroup.setGroupHasModule(grouphasm);
 					repo.addGroupHasModuleToGroup(lastSelectedGroup, grouphasm, moduleVersion);
 				}
 				

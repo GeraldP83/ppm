@@ -193,6 +193,7 @@ public class GroupAdmin {
 			groupModulesFromSelectedGroup = null;
 			createTree(canvas);
 		}
+		//BBBUUUUGGGG!!!
 		else {
 			groupModulesFromSelectedGroup = groupService.getGroupModules(lastSelectedGroup);
 			if (groupModulesFromSelectedGroup.size() == 0 || groupModulesFromSelectedGroup.get(0).getSoftwareVersion() == null) {

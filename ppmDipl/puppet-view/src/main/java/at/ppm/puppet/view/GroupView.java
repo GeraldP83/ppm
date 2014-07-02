@@ -103,7 +103,7 @@ public class GroupView {
 							selectedGroup = null;
 							eventbroker.post(Events.GROUPSELECTED, null);
 						}
-//						updateView();
+						updateView();
 					}
 				});
 		nodesViewTable = tableViewerGroupsView.getTable();
