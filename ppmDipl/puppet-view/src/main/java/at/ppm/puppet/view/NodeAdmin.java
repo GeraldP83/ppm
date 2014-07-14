@@ -76,6 +76,7 @@ public class NodeAdmin {
 	 */
 	@SuppressWarnings("unchecked")
 	private TreeView<String> createTreeStructure() {
+		//contains all packages with versions
 		treeStructureList = DeploymentConfigService.createTreeStructureForJavaFx();
 		TreeView<String> treeView = new TreeView<String>();
 		if (puppetModulesFromSelectedNode == null) {
@@ -90,13 +91,15 @@ public class NodeAdmin {
 		for (int i = 0; i < treeStructureList.size(); i++) {
 			
 			if ( !(puppetModulesFromSelectedNode.get(0).getSoftwareVersion().equalsIgnoreCase("Nothing Installed"))) {
-		
+				//how many versions of the packet are available
 				int numberOfVersions = treeStructureList.get(i).getVersions().size();
+				//java for example, this is the expandable treeitem
 				CheckBoxTreeItem<String> item = new CheckBoxTreeItem<String>(treeStructureList.get(i).getName());
 				@SuppressWarnings("rawtypes")
 				TreeItem[] boxArray = new TreeItem[numberOfVersions];
 				
 				for (int j = 0; j < numberOfVersions; j++) {
+					//the version name, for example java1751
 					CheckBox checkBox = new CheckBox(treeStructureList.get(i).getVersions().get(j));
 					checkBox.setOnAction(new CheckBoxEventHandler());
 					boxes.add(checkBox);

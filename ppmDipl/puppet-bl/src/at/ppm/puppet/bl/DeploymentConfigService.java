@@ -30,30 +30,28 @@ import at.ppm.puppet.dal.velocity.Velocity;
 
 public class DeploymentConfigService {
 	private final static IModelRepository repo = new ModelRepositoryImpl();
-	private final static PropertyConfig modulConfig = new PropertyConfig(PropertyFile.MODUL);
+	private final static PropertyConfig modulConfig = new PropertyConfig(
+			PropertyFile.MODUL);
 	private static PuppetParamsForVelocity velocityObject;
-	private static INodeService nodeservice = DeploymentServiceFactoryImpl.getInstance().createNodeService();
-	
-	
+	private static INodeService nodeservice = DeploymentServiceFactoryImpl
+			.getInstance().createNodeService();
+
 	private DeploymentConfigService() {
 	}
 
-
-	
-
-//	public static <T> ArrayList<T> getAllFromTable(Class<T> c) {
-//		ArrayList<T> all = repo.getAll(c);
-//		return all;
-//	}
+	// public static <T> ArrayList<T> getAllFromTable(Class<T> c) {
+	// ArrayList<T> all = repo.getAll(c);
+	// return all;
+	// }
 
 	public static ArrayList<PuppetModule> getPuppetModules(Node node) {
 		ArrayList<Assignment> assignments = node.getAssignment();
 		ArrayList<PuppetModule> puppetModules = new ArrayList<PuppetModule>(
 				assignments.size());
 		for (Assignment assignment : assignments) {
-			puppetModules.add(new PuppetModule(assignment.getModuleVersion().getVersion(),
-					assignment.getModuleVersion().getModule().getName(), assignment
-							.getDate(), assignment.getState()));
+			puppetModules.add(new PuppetModule(assignment.getModuleVersion()
+					.getVersion(), assignment.getModuleVersion().getModule()
+					.getName(), assignment.getDate(), assignment.getState()));
 		}
 		return puppetModules;
 	}
@@ -87,10 +85,9 @@ public class DeploymentConfigService {
 		return treeStructure;
 	}
 
-	
-
 	// TODO add puppet code here?
-	public static void setInstallingStateToAssignments(ArrayList<CheckBox> boxes, Node node) {
+	public static void setInstallingStateToAssignments(
+			ArrayList<CheckBox> boxes, Node node) {
 
 		for (CheckBox box : boxes) {
 			String nodeName = node.getName();
@@ -98,18 +95,23 @@ public class DeploymentConfigService {
 			if (box.isSelected()) {
 				if (!(nodeservice.nodeContainsSoftware(nodeName, moduleName))) {
 					nodeservice.addAssignmentToNode(nodeName, moduleName);
-				} else if ((nodeservice.getAssignmentFromNode(node, moduleName).getState()
-						.equalsIgnoreCase(AssignmentState.UNINSTALL.toString()))) {
-					Assignment assignment = nodeservice.getAssignmentFromNode(node,
-							moduleName);
-					nodeservice.changeAssignmentState(node, assignment, AssignmentState.INSTALLING);
+				} else if ((nodeservice.getAssignmentFromNode(node, moduleName)
+						.getState().equalsIgnoreCase(AssignmentState.UNINSTALL
+						.toString()))) {
+					Assignment assignment = nodeservice.getAssignmentFromNode(
+							node, moduleName);
+					nodeservice.changeAssignmentState(node, assignment,
+							AssignmentState.INSTALLING);
 				}
 			} else {
-				Assignment assignment = nodeservice.getAssignmentFromNode(node, moduleName);
+				Assignment assignment = nodeservice.getAssignmentFromNode(node,
+						moduleName);
 				if ((nodeservice.nodeContainsSoftware(nodeName, moduleName))
 						&& !(assignment.getState()
-								.equalsIgnoreCase(AssignmentState.UNINSTALL.toString()))) {
-					nodeservice.changeAssignmentState(node, assignment, AssignmentState.UNINSTALL);
+								.equalsIgnoreCase(AssignmentState.UNINSTALL
+										.toString()))) {
+					nodeservice.changeAssignmentState(node, assignment,
+							AssignmentState.UNINSTALL);
 				}
 			}
 		}
@@ -124,12 +126,14 @@ public class DeploymentConfigService {
 		ArrayList<Assignment> assignments = node.getAssignment();
 		for (Assignment assignment : assignments) {
 			String moduleNameConvertedForPupped = assignment.getModuleVersion()
-					.getModule().getName().toLowerCase() + assignment.getModuleVersion().getVersion().replaceAll("[\\W]", "");
+					.getModule().getName().toLowerCase()
+					+ assignment.getModuleVersion().getVersion()
+							.replaceAll("[\\W]", "");
 			if (assignment.getState().equalsIgnoreCase(
 					AssignmentState.INSTALLING.toString())) {
 				velocityObject
-						.addModule((moduleNameConvertedForPupped + AssignmentState.INSTALLING.toString())
-								.toLowerCase());
+						.addModule((moduleNameConvertedForPupped + AssignmentState.INSTALLING
+								.toString()).toLowerCase());
 			} else if (assignment.getState().equalsIgnoreCase(
 					AssignmentState.UNINSTALL.toString())) {
 				velocityObject
@@ -153,9 +157,5 @@ public class DeploymentConfigService {
 		}
 		Velocity.writePuppetSiteFile(nodeNames);
 	}
-
-	
-
-	
 
 }
