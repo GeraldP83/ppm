@@ -44,6 +44,11 @@ public class DeploymentConfigService {
 	// return all;
 	// }
 
+	
+	public static ArrayList<String> getDependenciesFromModule(String checkBoxName) {
+		return repo.getDependenciesFromModule(checkBoxName);
+	}
+	
 	public static ArrayList<PuppetModule> getPuppetModules(Node node) {
 		ArrayList<Assignment> assignments = node.getAssignment();
 		ArrayList<PuppetModule> puppetModules = new ArrayList<PuppetModule>(
@@ -55,7 +60,8 @@ public class DeploymentConfigService {
 		}
 		return puppetModules;
 	}
-
+	
+	//not safe....
 	public static ArrayList<String> getSoftwareVersionsFromPropFile(
 			String software) {
 		ArrayList<String> foundVersion = new ArrayList<>();

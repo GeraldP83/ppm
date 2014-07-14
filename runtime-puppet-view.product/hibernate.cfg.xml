@@ -23,6 +23,7 @@
     <mapping class="at.ppm.puppet.dal.hibpojos.Assignment"></mapping>
     <mapping class="at.ppm.puppet.dal.hibpojos.ModuleVersion"></mapping>
     <mapping class="at.ppm.puppet.dal.hibpojos.Module"></mapping>
+    <mapping class="at.ppm.puppet.dal.hibpojos.Dependency"></mapping>
 
   </session-factory>
 

@@ -1,8 +1,8 @@
 package at.ppm.puppet.view;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-import javafx.collections.ObservableList;
 import javafx.embed.swt.FXCanvas;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,6 +37,7 @@ public class NodeAdmin {
 	private ArrayList<SoftwareModule> treeStructureList;
 	private ArrayList<PuppetModule> puppetModulesFromSelectedNode;
 	private TreeView<String> treeView;
+	private ArrayList<CheckBoxTreeItem<String>> checkBoxRoots = new ArrayList<CheckBoxTreeItem<String>>();
 	private FXCanvas canvas;
 	private Node lastSelectedNode;
 	private ArrayList<CheckBox> boxes;
@@ -95,6 +96,7 @@ public class NodeAdmin {
 				int numberOfVersions = treeStructureList.get(i).getVersions().size();
 				//java for example, this is the expandable treeitem
 				CheckBoxTreeItem<String> item = new CheckBoxTreeItem<String>(treeStructureList.get(i).getName());
+				checkBoxRoots.add(item);
 				@SuppressWarnings("rawtypes")
 				TreeItem[] boxArray = new TreeItem[numberOfVersions];
 				
@@ -138,6 +140,7 @@ public class NodeAdmin {
 					continue;
 				}
 				CheckBoxTreeItem<String> item = new CheckBoxTreeItem<String>(treeStructureList.get(i).getName());
+				checkBoxRoots.add(item);
 				@SuppressWarnings("rawtypes")
 				TreeItem[] boxArray = new TreeItem[numberOfVersions];
 				
@@ -163,11 +166,40 @@ public class NodeAdmin {
 	private class CheckBoxEventHandler implements EventHandler<ActionEvent> {
 
 		@Override
-		public void handle(ActionEvent event) {
-//			CheckBox clicked = ((CheckBox) event.getSource());
-//			System.out.println(clicked.isSelected());
-//			System.out.println("checked " + clicked.getText());
+		public void handle(ActionEvent event) {	
+			CheckBox clicked = ((CheckBox) event.getSource());
+			System.out.println("checked " + clicked.getText());
+			if (clicked.isSelected()) {
+				checkDbForDependencies(clicked.getText());
+			}
 
+		}
+
+		
+		private void checkDbForDependencies(String selectedBox) {
+			ArrayList<String> dependenciesFromModule = DeploymentConfigService.getDependenciesFromModule(selectedBox);
+			if (dependenciesFromModule.size() > 0) {
+				for (int i = dependenciesFromModule.size(); i > 0; i--) {
+					checkDbForDependencies(dependenciesFromModule.get(i-1));
+					Iterator<CheckBox> iter = boxes.iterator();
+					while (iter.hasNext()) {
+						CheckBox box = iter.next();
+						if (box.getText().equalsIgnoreCase(dependenciesFromModule.get(i-1)) && (!box.isSelected())) {
+							box.setSelected(true);
+							Iterator<CheckBoxTreeItem<String>> rootItemIterator = checkBoxRoots.iterator();
+							while (rootItemIterator.hasNext()) {
+								CheckBoxTreeItem<String> rootItem = rootItemIterator.next();
+								String regex = "(\\d*)(\\W*)";
+								String removedNonLitFromBox = box.getText().replaceAll(regex, "");
+								if (removedNonLitFromBox.equalsIgnoreCase(rootItem.getValue())) {
+									rootItem.setExpanded(true);
+								}
+							}
+						}
+					}
+				}
+			}
+			
 		}
 		
 	}

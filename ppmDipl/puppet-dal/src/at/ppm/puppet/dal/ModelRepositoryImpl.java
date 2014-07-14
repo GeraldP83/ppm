@@ -16,6 +16,22 @@ public class ModelRepositoryImpl implements IModelRepository {
 	/**
 	 * 
 	 */
+	
+	@Override
+	public ArrayList<String> getDependenciesFromModule(String checkBoxName) {
+		ArrayList<String> list = new ArrayList<String>();
+		Session session = HibernateSession.getInstance();
+		Query query = session.createQuery("select parent from Dependency as dep where dep.module = " + "'" + checkBoxName + "'");
+		list = (ArrayList<String>) query.list();
+		HibernateSession.closeSession();
+		return list;
+		
+	};
+	
+	
+	
+	
+	
 	@Override
 	public void addAssignmentToNode(Node node, Assignment assignment,
 			ModuleVersion module) {

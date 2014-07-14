@@ -118,9 +118,9 @@ public class NodeServiceImpl implements INodeService{
 	}
 
 	@Override
-	public void addAssignmentToNode(String nodeName, String software) {
+	public void addAssignmentToNode(String nodeName, String moduleNameFromCheckBox) {
 		Node node = getNode(nodeName);
-		if (nodeContainsSoftware(nodeName, software)) {
+		if (nodeContainsSoftware(nodeName, moduleNameFromCheckBox)) {
 			throw new IllegalArgumentException(
 					"Node already contains this Module");
 		}
@@ -128,7 +128,7 @@ public class NodeServiceImpl implements INodeService{
 		assignment.setNode(node);
 		assignment.setDate(new Date());
 		assignment.setState(AssignmentState.INSTALLING.toString());
-		ModuleVersion moduleVersion = repo.getModuleVersion(modulConfig.get(software));
+		ModuleVersion moduleVersion = repo.getModuleVersion(modulConfig.get(moduleNameFromCheckBox));
 		assignment.setModuleVersion(moduleVersion);
 		repo.addAssignmentToNode(node, assignment, moduleVersion);
 		

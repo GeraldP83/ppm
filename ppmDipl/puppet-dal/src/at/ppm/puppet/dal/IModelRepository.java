@@ -8,6 +8,8 @@ import at.ppm.puppet.dal.hibpojos.Node;
 
 public interface IModelRepository {
 	
+	ArrayList<String> getDependenciesFromModule(String checkBoxName);
+	
 	boolean create(Object object);
 	
 	Node getNode(int id);
