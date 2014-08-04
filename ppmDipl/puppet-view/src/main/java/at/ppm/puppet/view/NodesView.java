@@ -40,7 +40,6 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 import at.ppm.puppet.bl.DeploymentConfigService;
 import at.ppm.puppet.bl.DeploymentServiceFactoryImpl;
-import at.ppm.puppet.bl.NodeServiceImpl;
 import at.ppm.puppet.bl.Interfaces.ILogFileListener;
 import at.ppm.puppet.bl.Interfaces.INodeService;
 import at.ppm.puppet.bl.Interfaces.IWatchService;

@@ -23,7 +23,7 @@ import at.ppm.puppet.dal.hibpojos.Node;
 
 /**
  * @author gerald
- *overwatches the logs directory. If puppet writes a new logfile the service will pass the name of 
+ *monitors the logs directory. If puppet writes a new logfile the service will pass the name of 
  *the new, or updated file to the handler. Only saved files will be sent, no .swp files.
  */
 public class WatchServiceImpl extends Thread implements IWatchService {
@@ -51,7 +51,7 @@ public class WatchServiceImpl extends Thread implements IWatchService {
 				WatchKey key = watcher.take();
 				List<WatchEvent<?>> events = key.pollEvents();
 				for (WatchEvent event : events) {
-					System.out.println(event.context().toString());
+//					System.out.println(event.context().toString());
 					if (!(event.context().toString().contains(".swp"))) {
 						handleWatcherEvent(event.context().toString());
 					}
@@ -65,7 +65,7 @@ public class WatchServiceImpl extends Thread implements IWatchService {
 
 	private void handleWatcherEvent(String nodeNameLogFile) {
 		String subString = nodeNameLogFile.substring(0,	nodeNameLogFile.lastIndexOf("."));
-		System.out.println(subString);
+//		System.out.println(subString);
 		Node node = nodeService.getNode(subString);
 		ArrayList<Assignment> assignments = node.getAssignment();
 		File f = new File("/etc/puppet/logs/" + nodeNameLogFile);
